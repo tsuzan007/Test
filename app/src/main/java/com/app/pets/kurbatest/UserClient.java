@@ -3,6 +3,7 @@ package com.app.pets.kurbatest;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -19,4 +20,7 @@ public interface UserClient {
 
     @GET("posts/?")
     Call <List<Post>> getPost(@Query("userId") int id);
+
+
+
 }

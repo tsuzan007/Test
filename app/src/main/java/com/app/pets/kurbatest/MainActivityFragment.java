@@ -36,7 +36,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivityFragment extends Fragment {
 
     RecyclerView recyclerView;
-    private String base_url="http://jsonplaceholder.typicode.com/";
+
     private Call<List<Users>> user_list;
     private Call<List<Post>> posts;
     private List<Users> myuser_list=new ArrayList<>();
@@ -58,21 +58,7 @@ public class MainActivityFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        HttpLoggingInterceptor httpLoggingInterceptor=new HttpLoggingInterceptor()
-                .setLevel(HttpLoggingInterceptor.Level.BODY);
-
-
-        OkHttpClient okHttpClient= new OkHttpClient.Builder()
-                .addInterceptor(httpLoggingInterceptor)
-                .build();
-
-
-        Retrofit retrofit= new Retrofit.Builder()
-                .baseUrl(base_url)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(okHttpClient)
-                .build();
-        userClient=retrofit.create(UserClient.class);
+        userClient=RetrofitClient.getRetrofitClient().create(UserClient.class);
         user_list=userClient.getUsers("users");
         user_list.enqueue(new Callback<List<Users>>() {
             @Override

@@ -2,12 +2,15 @@ package com.app.pets.kurbatest;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
+
+import java.util.Comparator;
 
 /**
  * Created by macbookpro on 6/27/17.
  */
 
-class Post implements Parcelable {
+class Post implements Parcelable,Comparator<Post>{
 
     /**
      * userId : 1
@@ -86,5 +89,12 @@ class Post implements Parcelable {
         dest.writeInt(id);
         dest.writeString(title);
         dest.writeString(body);
+    }
+
+
+
+    @Override
+    public int compare(Post o1, Post o2) {
+        return o1.getTitle().compareTo(o2.getTitle());
     }
 }
