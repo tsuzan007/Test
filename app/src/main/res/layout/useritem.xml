@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="@dimen/paddingA">
 
 
     <TextView
@@ -15,19 +17,24 @@
         android:id="@+id/address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/padding" />
+        android:layout_marginBottom="@dimen/paddingA"
+        android:layout_marginLeft="@dimen/padding"
+        android:layout_marginTop="@dimen/padding"
+        tools:layout_marginRight="@dimen/padding" />
 
     <TextView
         android:id="@+id/addressCity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/padding"
-        android:layout_marginBottom="@dimen/padding" />
+        android:layout_marginBottom="@dimen/padding"
+        android:layout_marginLeft="@dimen/padding"
+        android:layout_marginRight="@dimen/padding"
+        android:layout_marginTop="@dimen/paddingA" />
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@color/colorPrimaryDark"/>
+        android:layout_height="2dp"
+        android:background="@android:color/background_dark" />
 
 
 </LinearLayout>

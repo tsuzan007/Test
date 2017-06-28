@@ -1,22 +1,18 @@
 package com.app.pets.kurbatest;
 
+import android.app.IntentService;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
-
-
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -36,6 +32,19 @@ public class Main2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         mrecyclerview= (RecyclerView) findViewById(R.id.mysecondrecyclerview);
+        mrecyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                Collections.sort(object, new Comparator<Post>() {
+                    @Override
+                    public int compare(Post o1, Post o2) {
+                        return o1.getTitle().compareTo(o2.getTitle());
+                    }
+                });
+                secondAdapter.notifyDataSetChanged();
+
+            }
+        });
         floatingActionButton=(FloatingActionButton) findViewById(R.id.myfloating);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,13 +67,19 @@ public class Main2Activity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        secondAdapter.notifyDataSetChanged();
+
     }
 
     public class SecondAdapter extends RecyclerView.Adapter<SecondViewHolder>{
 
+        public SecondAdapter() {
+
+
+        }
+
         @Override
         public SecondViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
             View view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.userfeeditem, parent, false);
             return new SecondViewHolder(view);
@@ -87,17 +102,34 @@ public class Main2Activity extends AppCompatActivity {
             }
             return object.size();
         }
+
+        @Override
+        public int getItemViewType(int position) {
+            return position;
+        }
     }
     public class SecondViewHolder extends RecyclerView.ViewHolder{
         TextView titleA;
         TextView bodyA;
 
-        public SecondViewHolder(View itemView) {
+        public SecondViewHolder(final View itemView) {
             super(itemView);
             titleA= (TextView) itemView.findViewById(R.id.titlename);
             bodyA= (TextView) itemView.findViewById(R.id.mybody);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(itemView.getContext(),String.valueOf(getItemViewType()),Toast.LENGTH_LONG).show();
+                    Intent intent=new Intent(Main2Activity.this,PutActivity.class);
+                    intent.putExtra("title",titleA.getText());
+                    intent.putExtra("body",bodyA.getText());
+                    intent.putExtra("id",object.get(getItemViewType()).getId());
+                    startActivity(intent);
+                }
+            });
         }
     }
+
 
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
@@ -107,6 +139,7 @@ public class Main2Activity extends AppCompatActivity {
 //    }
 //    @Override
 //    public boolean onOptionsItemSelected(MenuItem item) {
+//        super.onOptionsItemSelected(item);
 //// Handle item selection
 //        switch (item.getItemId()) {
 //            case R.id.new_game:
