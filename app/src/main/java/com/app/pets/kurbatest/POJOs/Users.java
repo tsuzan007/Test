@@ -1,10 +1,12 @@
-package com.app.pets.kurbatest;
+package com.app.pets.kurbatest.POJOs;
+
+import java.util.Comparator;
 
 /**
  * Created by macbookpro on 6/27/17.
  */
 
-public class Users {
+public class Users implements Comparator<Users> {
     /**
      * id : 1
      * name : Leanne Graham
@@ -87,6 +89,16 @@ public class Users {
 
     public void setCompany(CompanyBean company) {
         this.company = company;
+    }
+
+    @Override
+    public int compare(Users o1, Users o2) {
+        return 0;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return false;
     }
 
     public static class AddressBean {

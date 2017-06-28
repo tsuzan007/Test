@@ -9,25 +9,22 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
+import com.app.pets.kurbatest.POJOs.Post;
+import com.app.pets.kurbatest.POJOs.Users;
+import com.app.pets.kurbatest.RetrofitInterface.UserClient;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by macbookpro on 6/27/17.
@@ -41,7 +38,7 @@ public class MainActivityFragment extends Fragment {
     private Call<List<Post>> posts;
     private List<Users> myuser_list=new ArrayList<>();
     private List<Post> myuser_post=new ArrayList<>();
-    private MyRecyclerViewAdapter myRecyclerViewAdapter;
+    MyRecyclerViewAdapter myRecyclerViewAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private UserClient userClient;
 
@@ -50,8 +47,22 @@ public class MainActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.activitymain_fragment,container,false);
         recyclerView= (RecyclerView) view.findViewById(R.id.myrecyclerview);
+
         myRecyclerViewAdapter=new MyRecyclerViewAdapter();
         layoutManager=new LinearLayoutManager(getActivity());
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                Collections.sort(myuser_list, new Comparator<Users>() {
+                            @Override
+                            public int compare(Users o1, Users o2) {
+                                 return o1.getName().compareTo(o2.getName());
+                            }
+                        });
+                        myRecyclerViewAdapter.notifyDataSetChanged();
+            }
+        });
+
         return view;
     }
 

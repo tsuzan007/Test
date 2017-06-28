@@ -1,8 +1,6 @@
 package com.app.pets.kurbatest;
 
-import android.app.IntentService;
 import android.content.Intent;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.app.pets.kurbatest.POJOs.Post;
+
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;

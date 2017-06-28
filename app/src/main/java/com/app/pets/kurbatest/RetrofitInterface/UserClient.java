@@ -1,11 +1,12 @@
-package com.app.pets.kurbatest;
+package com.app.pets.kurbatest.RetrofitInterface;
+
+import com.app.pets.kurbatest.POJOs.Post;
+import com.app.pets.kurbatest.POJOs.Users;
 
 import java.util.List;
 
 import retrofit2.Call;
-import retrofit2.http.Field;
 import retrofit2.http.GET;
-import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 

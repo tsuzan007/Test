@@ -1,8 +1,9 @@
-package com.app.pets.kurbatest;
+package com.app.pets.kurbatest.RetrofitInterface;
+
+import com.app.pets.kurbatest.POJOs.Post;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.Response;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;

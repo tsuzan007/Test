@@ -7,6 +7,9 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.app.pets.kurbatest.POJOs.Post;
+import com.app.pets.kurbatest.RetrofitInterface.UserPostClient;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;

@@ -1,8 +1,7 @@
-package com.app.pets.kurbatest;
+package com.app.pets.kurbatest.POJOs;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
 
 import java.util.Comparator;
 
@@ -10,7 +9,7 @@ import java.util.Comparator;
  * Created by macbookpro on 6/27/17.
  */
 
-class Post implements Parcelable,Comparator<Post>{
+public class Post implements Parcelable,Comparator<Post>{
 
     /**
      * userId : 1
